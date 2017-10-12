@@ -35,17 +35,16 @@ function Base.start{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS}(iter::EnumerableJoin{T,TKey
     inner_dict = OrderedDict{TKeyOuter,Array{TI,1}}()
     for i in iter.inner
         key = iter.innerKeySelector(i)
-        if !haskey(inner_dict, key)
-            inner_dict[key] = Array{TI}(0)
-        end
-        push!(inner_dict[key], i)
+        val = put!(() -> Vector{TI}(), inner_dict, key)
+        push!(val, i)
     end
 
     for i in iter.outer
         outerKey = iter.outerKeySelector(i)
-        if haskey(inner_dict,outerKey)
-            for j in inner_dict[outerKey]
-                push!(results, iter.resultSelector(i,j))
+        val = get(inner_dict, outerKey, nothing)
+        if val !== nothing
+            for j in val
+                push!(results, iter.resultSelector(i, j))
             end
         end
     end

@@ -30,10 +30,8 @@ function Base.start{T,TKey,TS,SO,ES}(iter::EnumerableGroupBySimple{T,TKey,TS,SO,
     result = OrderedDict{TKey,T}()
     for i in iter.source
         key = iter.elementSelector(i)
-        if !haskey(result, key)
-            result[key] = T(key,Array{TS}(0))
-        end
-        push!(result[key].elements,i)
+        val = get!(() -> T(key, Vector{TS}()), result, key)
+        push!(val.elements, i)
     end
     return collect(values(result)),1
 end
@@ -77,10 +75,8 @@ function Base.start{T,TKey,TR,SO,ES}(iter::EnumerableGroupBy{T,TKey,TR,SO,ES})
     result = OrderedDict{TKey,T}()
     for i in iter.source
         key = iter.elementSelector(i)
-        if !haskey(result, key)
-            result[key] = T(key,Array{TR}(0))
-        end
-        push!(result[key].elements,iter.resultSelector(i))
+        val = get!(() -> T(key,Vector{TR}()), result, key)
+        push!(val.elements, iter.resultSelector(i))
     end
     return collect(values(result)),1
 end
