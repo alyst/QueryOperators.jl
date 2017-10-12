@@ -49,7 +49,7 @@ function Base.start{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS}(iter::EnumerableJoin{T,TKey
         end
     end
 
-    return results,1
+    return results, 1
 end
 
 function Base.next{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS}(iter::EnumerableJoin{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS},state)

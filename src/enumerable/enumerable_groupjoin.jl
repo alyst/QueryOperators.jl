@@ -42,7 +42,7 @@ function Base.start{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS}(iter::EnumerableGroupJoin{T
     for i in iter.outer
         outerKey = iter.outerKeySelector(i)
         g = get!(() -> Vector{TI}(), inner_dict, outerKey)
-        push!(results, iter.resultSelector(i,g))
+        push!(results, iter.resultSelector(i, g))
     end
 
     return results,1

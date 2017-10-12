@@ -33,7 +33,7 @@ function Base.start{T,TKey,TS,SO,ES}(iter::EnumerableGroupBySimple{T,TKey,TS,SO,
         val = get!(() -> T(key, Vector{TS}()), result, key)
         push!(val.elements, i)
     end
-    return collect(values(result)),1
+    return collect(values(result)), 1
 end
 
 function Base.next{T,TKey,TS,SO,ES}(iter::EnumerableGroupBySimple{T,TKey,TS,SO,ES}, state)
@@ -78,7 +78,7 @@ function Base.start{T,TKey,TR,SO,ES}(iter::EnumerableGroupBy{T,TKey,TR,SO,ES})
         val = get!(() -> T(key,Vector{TR}()), result, key)
         push!(val.elements, iter.resultSelector(i))
     end
-    return collect(values(result)),1
+    return collect(values(result)), 1
 end
 
 function Base.next{T,TKey,TR,SO,ES}(iter::EnumerableGroupBy{T,TKey,TR,SO,ES}, state)
