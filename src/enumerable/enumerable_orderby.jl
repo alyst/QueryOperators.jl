@@ -108,7 +108,7 @@ function Base.start{T,S,KS,TKS}(iter::EnumerableThenBy{T,S,KS,TKS})
     if Base.iteratorsize(typeof(iter))==Base.HasLength()
         for i in enumerate(iter.source)
             elements[i[1]] = i[2]
-        end        
+        end
     else
         for i in iter.source
             push!(elements, i)

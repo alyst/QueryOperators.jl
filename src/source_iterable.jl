@@ -28,4 +28,3 @@ end
 function Base.done{T,S}(iter::EnumerableIterable{T,S}, state)
     return done(iter.source, state)
 end
-
