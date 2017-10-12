@@ -109,9 +109,7 @@ function Base.start{T,S,KS,TKS}(iter::EnumerableThenBy{T,S,KS,TKS})
             elements[i[1]] = i[2]
         end
     else
-        for i in iter.source
-            push!(elements, i)
-        end
+        append!(elements, iter.source)
     end
 
     sort!(elements, by=keySelector, lt=lt)
