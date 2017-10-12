@@ -19,8 +19,7 @@ end
 function _count(source::Enumerable, state)
     count_val = 0
     while !done(source, state)
-        ret_val = next(source, state)
-        state = ret_val[2]
+        state = next(source, state)[2]
         count_val += 1
     end
     return count_val

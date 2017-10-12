@@ -54,14 +54,12 @@ function Base.start{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS}(iter::EnumerableJoin{T,TKey
 end
 
 function Base.next{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS}(iter::EnumerableJoin{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS},state)
-    results = state[1]
-    curr_index = state[2]
+    results, curr_index = state
     return results[curr_index], (results, curr_index+1)
 end
 
 function Base.done{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS}(iter::EnumerableJoin{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS},state)
-    results = state[1]
-    curr_index = state[2]
+    results, curr_index = state
     return curr_index > length(results)
 end
 

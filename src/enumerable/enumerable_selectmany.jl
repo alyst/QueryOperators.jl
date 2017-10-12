@@ -69,14 +69,12 @@ function Base.start{T,SO,CS,RS}(iter::EnumerableSelectMany{T,SO,CS,RS})
 end
 
 function Base.next{T,SO,CS,RS}(iter::EnumerableSelectMany{T,SO,CS,RS},state)
-    results = state[1]
-    curr_index = state[2]
+    results, curr_index = state
     return results[curr_index], (results, curr_index+1)
 end
 
 function Base.done{T,SO,CS,RS}(iter::EnumerableSelectMany{T,SO,CS,RS},state)
-    results = state[1]
-    curr_index = state[2]
+    results, curr_index = state
     return curr_index > length(results)
 end
 

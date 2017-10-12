@@ -47,8 +47,7 @@ function Base.start{T,S,KS,TKS}(iter::EnumerableOrderby{T,S,KS,TKS})
 end
 
 function Base.next{T,S,KS,TKS}(iter::EnumerableOrderby{T,S,KS,TKS}, state)
-    elements = state[1]
-    i = state[2]
+    elements, i = state
     return elements[i], (elements, i+1)
 end
 
@@ -121,8 +120,7 @@ function Base.start{T,S,KS,TKS}(iter::EnumerableThenBy{T,S,KS,TKS})
 end
 
 function Base.next{T,S,KS,TKS}(iter::EnumerableThenBy{T,S,KS,TKS}, state)
-    elements = state[1]
-    i = state[2]
+    elements, i = state
     return elements[i], (elements, i+1)
 end
 

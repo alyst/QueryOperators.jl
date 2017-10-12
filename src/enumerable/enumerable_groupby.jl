@@ -86,14 +86,12 @@ function Base.start{T,TKey,TR,SO,ES}(iter::EnumerableGroupBy{T,TKey,TR,SO,ES})
 end
 
 function Base.next{T,TKey,TR,SO,ES}(iter::EnumerableGroupBy{T,TKey,TR,SO,ES}, state)
-    results = state[1]
-    curr_index = state[2]
+    results, curr_index = state
     return results[curr_index], (results, curr_index+1)
 end
 
 function Base.done{T,TKey,TR,SO,ES}(iter::EnumerableGroupBy{T,TKey,TR,SO,ES}, state)
-    results = state[1]
-    curr_index = state[2]
+    results, curr_index = state
     return curr_index > length(results)
 end
 
