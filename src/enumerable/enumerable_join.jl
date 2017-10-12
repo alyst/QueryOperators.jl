@@ -30,7 +30,7 @@ end
 
 # TODO This should be changed to a lazy implementation
 function Base.start{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS}(iter::EnumerableJoin{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS})
-    results = Array{T}(0)
+    results = Vector{T}()
 
     inner_dict = OrderedDict{TKeyOuter,Array{TI,1}}()
     for i in iter.inner

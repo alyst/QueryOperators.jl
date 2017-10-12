@@ -29,7 +29,7 @@ end
 function Base.start{T,S,KS,TKS}(iter::EnumerableOrderby{T,S,KS,TKS})
     rows = Base.iteratorsize(typeof(iter))==Base.HasLength() ? length(iter) : 0
 
-    elements = Array{T}(rows)
+    elements = Vector{T}(rows)
 
     if Base.iteratorsize(typeof(iter))==Base.HasLength()
         for i in enumerate(iter.source)
@@ -102,7 +102,7 @@ function Base.start{T,S,KS,TKS}(iter::EnumerableThenBy{T,S,KS,TKS})
 
     rows = Base.iteratorsize(typeof(iter))==Base.HasLength() ? length(iter) : 0
 
-    elements = Array{T}(rows)
+    elements = Vector{T}(rows)
 
     if Base.iteratorsize(typeof(iter))==Base.HasLength()
         for i in enumerate(iter.source)

@@ -30,9 +30,9 @@ end
 
 # TODO This should be changed to a lazy implementation
 function Base.start{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS}(iter::EnumerableGroupJoin{T,TKeyOuter,TI,SO,SI,OKS,IKS,RS})
-    results = Array{T}(0)
+    results = Vector{T}()
 
-    inner_dict = OrderedDict{TKeyOuter,Array{TI,1}}()
+    inner_dict = OrderedDict{TKeyOuter,Vector{TI}}()
     for i in iter.inner
         key = iter.innerKeySelector(i)
         val = get!(() -> Vector{TI}(), inner_dict, key)

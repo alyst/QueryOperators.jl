@@ -58,7 +58,7 @@ end
 
 # TODO This should be changed to a lazy implementation
 function Base.start{T,SO,CS,RS}(iter::EnumerableSelectMany{T,SO,CS,RS})
-    results = Array{T}(0)
+    results = Vector{T}()
     for i in iter.source
         for j in iter.collectionSelector(i)
             push!(results,iter.resultSelector(i,j))
